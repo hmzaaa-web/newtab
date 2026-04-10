@@ -1,0 +1,99 @@
+import { shortcutSiteFormListener } from "./shortcuts.js";
+
+const popupBackground = document.getElementById("popupBg");
+
+/**  ======================  Popup Background =========================
+ *
+ * A slightly blurry, dark and semi transparent background. It covers the entire screen.
+ * It only shows when any popup is open. Clicking this background will close the popup.
+ * Note: it only removes `show` class from all the html elements which have the class `popup`.
+ * So every popup should be designed according the logic.
+ */
+export function showPopup(element) {
+  popupBackground.classList.toggle("show");
+  element.classList.toggle("show");
+}
+/**
+ * Closing the popup and hiding the popup background. It will by default called on click event
+ * of the popup background.
+ */
+export function closePopup() {
+  const canPopupElements = document.querySelectorAll(".popup");
+  canPopupElements.forEach((e) => e.classList.remove("show"));
+  popupBackground.classList.remove("show");
+}
+/**
+ * Add click listener to close the popup and the background itself. Internally calling the
+ * `closePopup` function.
+ */
+function _popupBackgroundListener() {
+  popupBackground.addEventListener("click", closePopup);
+}
+
+/** =====================  Register all the UI eventListeners ====================== */
+export async function initUiListeners() {
+  _popupBackgroundListener();
+  _mailButtonListener();
+  _applicationQuickAccessListener();
+  _settingsToggleEventListener();
+  _initKeyBindings();
+  shortcutSiteFormListener();
+}
+
+/**  ======================  Email =========================
+ *
+ * When user clicks on the button, There most popular email service provider including Gmail
+ * Outlook and Yahoo will popup. The popupBackground should be display and blur the entire screen.
+ */
+function _mailButtonListener() {
+  const mailContainer = document.getElementById("mailContainer");
+  const toggleButton = document.getElementById("ToggleMailBtn");
+
+  toggleButton.addEventListener("click", () => showPopup(mailContainer));
+}
+
+/**  ===================  Application Quick Access ====================
+ *
+ * The application quick access that ships with the extension. The toggle button is located
+ * in the bottom right corner.
+ */
+function _applicationQuickAccessListener() {
+  const quickApplication = document.getElementById("quickApplication");
+  const toggleButton = document.getElementById("toggleApp");
+  toggleButton.addEventListener("click", () => showPopup(quickApplication));
+}
+
+/**  ===================  Settings ====================
+ *
+ * All the settings of the extension.
+ */
+function _settingsToggleEventListener() {
+  const settingPage = document.getElementById("settingPage");
+  const showSettings = document.getElementById("showSettings");
+  const closeSettings = document.getElementById("closeSettings");
+  showSettings.addEventListener("click", () => showPopup(settingPage));
+  closeSettings.addEventListener("click", () => closePopup());
+}
+/**  ===================  Key Bindings ====================
+ */
+function _initKeyBindings() {
+  document.addEventListener("keydown", (e) => {
+    if (e.key == "Escape") return closePopup(); // Close popups [Escape]
+    if (e.ctrlKey && e.key == "q") document.querySelector("#toggleApp").click(); // Toggle quick sites
+    if (e.ctrlKey && e.key == "m") document.querySelector("#ToggleMailBtn").click(); // Toggle quick sites
+    if (e.ctrlKey && e.key == "g") location.href = "https://mail.google.com"; // Redirect Mail sites
+    if (e.ctrlKey && e.key == "o") location.href = "https://outlook.live.com"; // Redirect Mail sites
+    if (e.ctrlKey && e.key == "y") location.href = "https://mail.yahoo.com"; // Redirect Mail sites
+
+    if (e.ctrlKey && e.key == "s") {
+      // Open settings [Ctrl-s]
+      e.preventDefault();
+      document.querySelector("#showSettings").click();
+    }
+    // Navigate first 10 saved short cuts with keyboard shortcuts
+    if (e.ctrlKey && Number(e.key).toString() !== "NaN") {
+      const index = e.key != 0 ? e.key - 1 : 9;
+      document.querySelectorAll(".everyShortcut").item(index).querySelector("a").click();
+    }
+  });
+}

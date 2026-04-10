@@ -1,0 +1,208 @@
+/* add shortcut form */
+section#addAppContainer {
+  color: var(--text-color);
+  display: none;
+  z-index: 3;
+  max-width: 55vw;
+  width: 500px;
+  min-height: 200px;
+  min-width: 350px;
+  background-color: #ffffff50;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(28px);
+  box-shadow:
+    5px 5px 15px #0002,
+    inset 2px 2px 1px 1px #fff2;
+}
+section#addAppContainer.show {
+  display: block;
+}
+section#addAppContainer .newShortcutForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  gap: 1rem;
+  padding: 1rem;
+}
+section#addAppContainer .shortcutInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+section#addAppContainer .shortcutInput label {
+  font-weight: 700;
+  font-size: 15px;
+  padding-bottom: 5px;
+}
+section#addAppContainer .shortcutInput input {
+  width: 100%;
+  padding: 7px 1rem;
+  border-radius: 10px;
+  border: 2px solid color-mix(in srgb, var(--text-color), transparent 95%);
+  background: #9993;
+  font-weight: 500;
+  font-size: medium;
+  color: var(--text-color);
+}
+section#addAppContainer .shortcutInput input:focus {
+  border: 2px solid var(--light-accent);
+  outline: none;
+}
+section#addAppContainer #shortcutSaveBtn {
+  align-items: center;
+  background-color: var(--soft-accent);
+  border-radius: 17px;
+  border-style: none;
+  box-shadow: 3px 3px 6px #00000035;
+  color: var(--light-background);
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  height: 35px;
+  justify-content: center;
+  letter-spacing: 0.25px;
+  line-height: normal;
+  overflow: visible;
+  padding: 2px 24px;
+  text-align: center;
+  transition:
+    box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 15ms linear 30ms,
+    transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: max-content;
+  will-change: transform, opacity;
+  margin: auto;
+  display: block;
+}
+section#addAppContainer #shortcutSaveBtn:hover {
+  background: transparent;
+  color: var(--text-color);
+}
+
+/* Shortcuts  */
+.everyShortcut.plusIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+.everyShortcut.plusIcon p {
+  font-size: 50px;
+  position: relative;
+}
+section.shortcutApp#shortcutApp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70vw;
+  width: 800px;
+  max-width: 98vw;
+  margin: 100px auto;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+#shortcutApp .everyShortcut {
+  width: 85px;
+  aspect-ratio: 1;
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.everyShortcut .icon {
+  position: relative;
+  display: inline-block;
+  filter: drop-shadow(1px 1px 1px color-mix(in srgb, var(--text-color), transparent 90%));
+  width: 40px;
+  aspect-ratio: 1;
+}
+.everyShortcut .title {
+  text-align: center;
+  text-overflow: ellipsis;
+  /* color: var(--text-color); */
+  color: var(--text-color);
+  text-shadow:
+    1px 1px 3px var(--light-background),
+    0px 0px 15px var(--light-background);
+  max-width: 100%;
+}
+/* adaptive icons  */
+.shortcutApp.adaptive .everyShortcut {
+  background-color: var(--soft-accent);
+}
+.shortcutApp.adaptive .everyShortcut .icon {
+  filter: grayscale(1);
+  mix-blend-mode: screen;
+}
+.shortcutApp.adaptive .everyShortcut .title {
+  color: var(--light-background);
+}
+.shortcutApp.adaptive .everyShortcut.plusIcon {
+  color: var(--light-background);
+}
+.shortcutApp.adaptive .threeDot {
+  fill: var(--light-background);
+}
+.everyShortcut .threeDot {
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 3px;
+  aspect-ratio: 1/1;
+  border-radius: 30px;
+  padding: 0px 3px;
+  transition: all 200ms;
+  color: var(--text-color);
+  fill: var(--text-color);
+  z-index: 2;
+}
+.everyShortcut .threeDot svg {
+  opacity: 0;
+}
+.everyShortcut .threeDot:hover {
+  background-color: #fff9;
+}
+.everyShortcut:hover .threeDot svg {
+  opacity: 1;
+}
+.everyShortcut .threeDotOptions {
+  position: absolute;
+  background: #9999;
+  backdrop-filter: blur(7px);
+  display: none;
+  right: 0;
+  top: 0;
+  border-radius: 10px;
+  z-index: 1;
+  overflow: hidden;
+}
+.everyShortcut.showOptions .threeDotOptions {
+  display: block;
+}
+.everyShortcut .threeDotOptions p {
+  font-weight: bold;
+  padding: 7px 15px;
+}
+.everyShortcut .threeDotOptions p:hover {
+  background-color: #ccc9;
+}

@@ -1,0 +1,217 @@
+/* setting section == */
+#setting {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--text-color);
+  background-color: var(--light-accent);
+}
+.settingPage {
+  height: 100vh;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  width: 0;
+  transition: all 500ms;
+  z-index: 3;
+}
+.settingPage.show {
+  max-width: 100vw;
+  width: 500px;
+}
+.setting .settingsPageWrapper {
+  max-width: 100vw;
+  width: 500px;
+  height: 100vh;
+  overflow: scroll;
+  box-shadow: inset 2px 2px 1px color-mix(in srgb, var(--light-accent), transparent 80%);
+  background: #ffffff50;
+  backdrop-filter: blur(30px);
+  border-radius: 30px 0 0 30px;
+}
+.settingPage .settingsHeader {
+  padding: 1rem;
+  font-size: 25px;
+  background-color: #fff3;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: bold;
+}
+#setting .showSettings,
+#setting .closeSettings {
+  position: absolute;
+  top: 0.5rem;
+  right: 0rem;
+  width: 40px;
+  display: inline-flex;
+  border: none;
+  outline: none;
+  padding: 0;
+  z-index: 1;
+  background: transparent;
+  fill: transparent;
+  stroke: var(--text-color);
+}
+#setting .closeSettings {
+  position: relative;
+  left: 0;
+  top: 0;
+}
+/* credit */
+.settingsHeader .openCreditButton {
+  height: 50px;
+  display: inline-block;
+  fill: var(--accent);
+}
+
+/* setting body  */
+.settingBody {
+  padding: 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+/* Color Themes  */
+.settingBody .colors {
+  padding-top: 0.7rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.settingBody .colors .color {
+  position: relative;
+  list-style: none;
+  height: 50px;
+  width: 50px;
+  flex-wrap: wrap;
+  background-color: var(--themeColor);
+  border-radius: 30px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: 2px solid color-mix(in srgb-linear, var(--text-color), transparent 90%);
+  border: none;
+  overflow: hidden;
+}
+input[name="color"]:checked::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  content: "";
+  height: 55%;
+  width: 55%;
+  background: var(--background);
+  opacity: 70%;
+}
+input#colorPicker {
+  width: calc(50px * 2 + 1rem);
+}
+#colorPicker::before {
+  content: "Pick color";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: var(--light-background);
+  background: var(--accent);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* support project  */
+.supportBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.supportBox a {
+  text-decoration: none;
+}
+.supportBox .listTile {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border-radius: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 150ms;
+}
+.supportBox .listTile .icon {
+  fill: currentColor;
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+  padding: 0;
+}
+.supportBox a:nth-child(1) .listTile {
+  background-color: #fff7;
+  color: #555;
+}
+.supportBox a:nth-child(1) .listTile:hover {
+  background-color: #0007;
+  color: #ccc;
+}
+.supportBox a:nth-child(2) .listTile {
+  background-color: #0007;
+  color: #ccc;
+}
+.supportBox a:nth-child(2) .listTile:hover {
+  background-color: #fff7;
+  color: #555;
+}
+
+/* Title or heading or caption of each settings group */
+.settingsCaption {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* search builder toggle button  */
+.searchSetting .ic-search {
+  fill: var(--text-color);
+}
+
+/* backup restore and reset  */
+.restoreContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+.restoreContainer button {
+  width: 100%;
+  padding: 15px 0;
+  border: 2px solid var(--soft-accent);
+  background-color: var(--accent);
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--light-background);
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.restoreContainer svg {
+  height: 25px;
+  width: 25px;
+  fill: var(--light-background);
+}
+.restoreContainer .backupAndRestore {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
